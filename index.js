@@ -1,7 +1,13 @@
-import { Client, GatewayIntentBits, Routes } from "discord.js";
+import {
+  Client,
+  GatewayIntentBits,
+  Routes,
+  ActionRowBuilder,
+  SelectMenuBuilder,
+} from "discord.js";
 import { REST } from "@discordjs/rest";
-import { hitMe } from "./utils.js";
-import { commands } from "./enums.js";
+import { hitMe, getRandomMovieByGenre } from "./utils.js";
+import { commands, genres } from "./enums.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -34,14 +40,29 @@ client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   if (interaction.commandName === "hit-me") {
+    await interaction.reply("Working on it.");
     const movie = await hitMe();
-    await interaction.reply(movie);
+    await interaction.editReply(movie);
+    return;
+  }
+  if (interaction.commandName === "genre") {
+    const row = new ActionRowBuilder().addComponents(
+      new SelectMenuBuilder()
+        .setCustomId("genre")
+        .setPlaceholder("Nothing selected")
+        .addOptions(...genres)
+    );
+    await interaction.reply({ content: "Select a genre", components: [row] });
   }
 });
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isSelectMenu()) return;
 
-client.on("messageCreate", (message) => {
-  if (message.content === "ping") {
-    message.reply("Pong");
+  if (interaction.customId === "genre") {
+    await interaction.deferUpdate();
+    const genreId = interaction.values[0];
+    const movie = await getRandomMovieByGenre(genreId);
+    await interaction.editReply(movie);
   }
 });
 

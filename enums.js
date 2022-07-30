@@ -1,28 +1,33 @@
 export const commands = [
-    {
-      name: "hit-me",
-      description: "Replies with Hi!",
-    },
-  ];
+  {
+    name: "hit-me",
+    description: "Replies with random movie",
+  },
+  {
+    name: "genre",
+    description:
+      "Replies with recommends random movies from a genre of your choice",
+  },
+];
 
 export const genres = [
-  { id: 28, name: "Action" },
-  { id: 12, name: "Adventure" },
-  { id: 16, name: "Animation" },
-  { id: 35, name: "Comedy" },
-  { id: 80, name: "Crime" },
-  { id: 99, name: "Documentary" },
-  { id: 18, name: "Drama" },
-  { id: 10751, name: "Family" },
-  { id: 14, name: "Fantasy" },
-  { id: 36, name: "History" },
-  { id: 27, name: "Horror" },
-  { id: 10402, name: "Music" },
-  { id: 9648, name: "Mystery" },
-  { id: 10749, name: "Romance" },
-  { id: 878, name: "Science Fiction" },
-  { id: 10770, name: "TV Movie" },
-  { id: 53, name: "Thriller" },
-  { id: 10752, name: "War" },
-  { id: 37, name: "Western" },
+  { value: "28", label: "Action" },
+  { value: "12", label: "Adventure" },
+  { value: "16", label: "Animation" },
+  { value: "35", label: "Comedy" },
+  { value: "80", label: "Crime" },
+  { value: "99", label: "Documentary" },
+  { value: "18", label: "Drama" },
+  { value: "10751", label: "Family" },
+  { value: "14", label: "Fantasy" },
+  { value: "36", label: "History" },
+  { value: "27", label: "Horror" },
+  { value: "10402", label: "Music" },
+  { value: "9648", label: "Mystery" },
+  { value: "10749", label: "Romance" },
+  { value: "878", label: "Science Fiction" },
+  { value: "10770", label: "TV Movie" },
+  { value: "53", label: "Thriller" },
+  { value: "10752", label: "War" },
+  { value: "37", label: "Western" },
 ];
