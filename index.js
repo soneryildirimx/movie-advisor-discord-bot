@@ -4,13 +4,14 @@ import {
   Routes,
   ActionRowBuilder,
   SelectMenuBuilder,
+  ActivityType,
 } from "discord.js";
 import { REST } from "@discordjs/rest";
-import { hitMe, getRandomMovieByGenre } from "./utils.js";
+import { hitMe, getRandomMovieByGenre, getTrending } from "./utils.js";
 import { commands, genres } from "./enums.js";
+import { CronJob } from "cron";
 import dotenv from "dotenv";
 dotenv.config();
-
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 (async () => {
@@ -34,6 +35,14 @@ const client = new Client({
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
+
+  const setActivityJob = new CronJob("*/120 * * * *", async () => {
+    const movie = await getTrending();
+    client.user.setActivity(movie, {
+      type: ActivityType.Watching,
+    });
+  });
+  setActivityJob.start();
 });
 
 client.on("interactionCreate", async (interaction) => {

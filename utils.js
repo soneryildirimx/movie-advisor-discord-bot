@@ -48,3 +48,14 @@ export const hitMe = async () => {
   const movie = await getRandomMovie(latest);
   return `https://www.imdb.com/title/${movie}/`;
 };
+
+export const getTrending = async () => {
+  const randomMovie = Math.floor(Math.random() * 20);
+  const response = await fetch(`${baseUrl}/trending/movie/day?${baseQuery}`);
+  const { results } = await response.json();
+  return results[randomMovie].title;
+};
+
+export const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
