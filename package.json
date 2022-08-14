@@ -7,8 +7,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
-  },
+    "dev": "export NODE_ENV=dev && nodemon index.js",
+    "start": "export NODE_ENV=prod && node index.js"
+ },
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
     "cron": "^2.1.0",
